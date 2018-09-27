@@ -1,0 +1,18 @@
+---
+
+- name: install common packages (apt)
+  become: yes
+  apt:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - git
+    - vim
+    - zsh
+    - fonts-firacode
+    - curl
+    
+- name: install autoenv
+  git:
+    repo: https://github.com/kennethreitz/autoenv.git
+    dest: ~/.autoenv

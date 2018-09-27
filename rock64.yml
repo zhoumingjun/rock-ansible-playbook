@@ -1,0 +1,14 @@
+---
+- hosts: rock64
+  tasks:
+  - import_role: 
+      name: common
+  - import_role:
+      name: ohmyzsh
+  - import_role:
+      name: v2ray
+    vars:
+      mode: client-office
+
+ 
+ 
