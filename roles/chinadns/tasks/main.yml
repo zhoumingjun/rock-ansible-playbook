@@ -1,0 +1,35 @@
+---
+# configure chinadns
+- name: create chinadns
+  become: true
+  copy: 
+    src: chinadns
+    dest: /opt/chinadns/chinadns
+    mode: 0555
+    force: yes
+
+- name: create chnroute file
+  become: True
+  copy:
+    src:  chnroute.txt
+    dest:  /opt/chinadns/chnroute.txt
+    force: yes 
+  
+- name: create chinadns service
+  become: true
+  copy:
+    src: chinadns.service
+    dest: /lib/systemd/system/chinadns.service
+    mode: 0644
+    force: yes
+
+- name: enable service chinadns.service 
+  systemd:
+    name: chinadns
+    enabled: yes
+    state: started
+
+
+
+
+ 

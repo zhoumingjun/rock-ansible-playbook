@@ -6,9 +6,14 @@
   - import_role:
       name: ohmyzsh
   - import_role:
-      name: v2ray
-    vars:
-      mode: client-office
+      name: shadowsocks
+  - import_role:
+      name: chinadns
+  - import_role:
+      name: dnsmasq
+  - import_role:
+      name: gateway
+
 
  
  

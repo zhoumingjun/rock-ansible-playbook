@@ -1,0 +1,28 @@
+---
+- name: netfilter-persistent
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - netfilter-persistent
+    - iptables-persistent
+
+- name: Download foo.conf
+  become: true
+  get_url:
+    url: https://raw.githubusercontent.com/jordanrinke/ipsets-persistent/master/10-ipset
+    dest: /usr/share/netfilter-persistent/plugins.d/10-ipset
+    mode: 0755
+
+- name: netfilter-persistent service
+  systemd:
+    name: netfilter-persistent
+    enabled: yes
+
+- name: create rules
+  become: true
+  copy: 
+    src: rules.sh
+    dest: /root/rules.sh
+    force: yes

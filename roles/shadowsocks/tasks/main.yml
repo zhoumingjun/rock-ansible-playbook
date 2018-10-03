@@ -1,0 +1,42 @@
+---
+# configure shadowsocks
+- name: shadowsocks-libev
+  become: yes
+  apt:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - shadowsocks-libev
+
+- name: create shadowsocks-libev configuration files
+  become: true
+  copy: 
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    force: yes
+  with_items:
+    - { src: "redir-personal.json", dest: "/etc/shadowsocks-libev/redir-personal.json" }
+    - { src: "tunnel-personal.json", dest: "/etc/shadowsocks-libev/tunnel-personal.json" }
+
+- name: Create symbolic link 
+  become: true
+  file:
+    src:  "{{ item.src }}"
+    dest:  "{{ item.dest }}"
+    force: yes 
+    state: link 
+  with_items:
+    - { src: "/etc/shadowsocks-libev/redir-personal.json", dest: "/etc/shadowsocks-libev/redir.json" }
+    - { src: "/etc/shadowsocks-libev/tunnel-personal.json", dest: "/etc/shadowsocks-libev/tunnel.json" }
+
+- name: ss systemd
+  become: true
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: True
+  with_items:
+    - shadowsocks-libev-redir@redir.service
+    - shadowsocks-libev-tunnel@tunnel.service
+
+-

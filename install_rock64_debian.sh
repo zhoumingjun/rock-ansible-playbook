@@ -20,7 +20,7 @@ read
 print_step 2 "install base packages"
 
 sudo apt-get update
-sudo apt-get install -y ansible git curl wget openssh-server
+sudo apt-get install -y ansible git curl wget openssh-server python
 
 # step 3
 print_step 3 "clone git@github.com:zhoumingjun/ansible-playbooks.git"
