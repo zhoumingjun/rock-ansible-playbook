@@ -1,3 +1,7 @@
+# introduction
+This playbook will configure the rock64 SBC as a gateway.
+
+
 # ansible-playbooks
 
 ## prepare vaultid file
