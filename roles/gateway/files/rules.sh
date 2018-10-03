@@ -19,8 +19,8 @@ ipset create gfwlist hash:ip
 # iptables
 # nat
 iptables -t nat -N SHADOWSOCKS
-iptables -t nat -A SHADOWSOCKS -d 65.49.196.94 -j RETURN
-iptables -t nat -A SHADOWSOCKS -d 104.245.44.130 -j RETURN
+iptables -t nat -A SHADOWSOCKS -d <serverip> -j RETURN
+iptables -t nat -A SHADOWSOCKS -d <serverip> -j RETURN
 iptables -t nat -A SHADOWSOCKS -m set --match-set loprivate dst -j RETURN
 iptables -t nat -A SHADOWSOCKS -m set --match-set chnip dst -j RETURN
 #iptables -t nat -A SHADOWSOCKS -p tcp -j REDIRECT --to-ports 1081
