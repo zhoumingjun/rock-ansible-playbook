@@ -1,2 +1,1 @@
-[rock64]
-10.0.0.254
+proxy ansible_host=10.0.0.254

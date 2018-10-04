@@ -22,7 +22,7 @@
 
 - name: create rules
   become: true
-  copy: 
-    src: rules.sh
+  template: 
+    src: rules.sh.j2
     dest: /root/rules.sh
     force: yes

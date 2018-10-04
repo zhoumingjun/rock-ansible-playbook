@@ -8,15 +8,19 @@
   with_items:
     - shadowsocks-libev
 
-- name: create shadowsocks-libev configuration files
+- name: craete ss-redir configurations
+  become: yes
+  template:
+    src: redir.json.j2
+    dest: /etc/shadowsocks-libev/redir-{{item.name}}.json
+  with_items: "{{ ss.servers }}"
+
+- name: create ss-tunnel configurations
   become: true
-  copy: 
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    force: yes
-  with_items:
-    - { src: "redir-personal.json", dest: "/etc/shadowsocks-libev/redir-personal.json" }
-    - { src: "tunnel-personal.json", dest: "/etc/shadowsocks-libev/tunnel-personal.json" }
+  template:
+    src: tunnel.json.j2
+    dest: /etc/shadowsocks-libev/tunnel-{{item.name}}.json
+  with_items: "{{ ss.servers }}"
 
 - name: Create symbolic link 
   become: true
@@ -26,8 +30,8 @@
     force: yes 
     state: link 
   with_items:
-    - { src: "/etc/shadowsocks-libev/redir-personal.json", dest: "/etc/shadowsocks-libev/redir.json" }
-    - { src: "/etc/shadowsocks-libev/tunnel-personal.json", dest: "/etc/shadowsocks-libev/tunnel.json" }
+    - { src: "/etc/shadowsocks-libev/redir-{{ss.default}}.json", dest: "/etc/shadowsocks-libev/redir.json" }
+    - { src: "/etc/shadowsocks-libev/tunnel-{{ss.default}}.json", dest: "/etc/shadowsocks-libev/tunnel.json" }
 
 - name: ss systemd
   become: true
