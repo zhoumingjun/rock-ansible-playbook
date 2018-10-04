@@ -13,6 +13,9 @@ ln -s ~/Dropbox/ansible-vault-id/ansible-playbooks vaultid
 ```
 ansible-vault encrypt roles/gateway/files/* --vault-id @vaultid
 ansible-vault decrypt roles/gateway/files/* --vault-id @vaultid
+
+ansible-vault encrypt roles/shadowsocks/files/* --vault-id @vaultid
+ansible-vault decrypt roles/shadowsocks/files/* --vault-id @vaultid
 ```
  
  
