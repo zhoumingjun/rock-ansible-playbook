@@ -1,19 +1,20 @@
 ---
 - hosts: proxy
   tasks:
-#   - import_role: 
-#       name: common
-#   - import_role:
-#       name: ohmyzsh
-#   - import_role:
-#       name: shadowsocks
-#   - import_role:
-#       name: chinadns
-#   - import_role:
-#       name: dnsmasq
+  - import_role: 
+      name: common
+  - import_role:
+      name: ohmyzsh
+  - import_role:
+      name: shadowsocks
+  - import_role:
+      name: chinadns
+  - import_role:
+      name: dnsmasq
   - import_role:
       name: gateway
- 
+  - import_role:
+      name: autossh
 
 
  

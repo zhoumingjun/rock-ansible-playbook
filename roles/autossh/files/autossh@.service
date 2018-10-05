@@ -1,0 +1,13 @@
+[Unit]
+Description=Setup a secure tunnel to %I
+After=network.target
+
+[Service]
+EnvironmentFile=/etc/autossh/%i.conf
+ExecStart=/usr/bin/autossh $SSH_OPTIONS
+
+RestartSec=5
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
