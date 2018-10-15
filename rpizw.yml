@@ -1,0 +1,9 @@
+---
+- hosts: rpizw
+  tasks:
+  - import_role:
+      name: ngrok
+
+
+ 
+ 

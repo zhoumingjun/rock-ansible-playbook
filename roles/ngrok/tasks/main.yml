@@ -1,0 +1,22 @@
+---
+- name: ngrok service
+  become: yes
+  copy:
+    src: ngrok@.service
+    dest: /lib/systemd/system/ngrok@.service
+    mode: 0644 
+    force: yes
+
+- name: create ngrok.conf
+  become: true
+  template: 
+    src: ngrok.conf
+    dest: /opt/ngrok/ngrok.conf
+    force: yes
+
+- name: ngrok systemd
+  become: true
+  systemd:
+    name: ngrok@ssh.service
+    state: started
+    enabled: true

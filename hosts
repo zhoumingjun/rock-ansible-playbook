@@ -1,1 +1,2 @@
-proxy ansible_host=10.0.0.254
+rock64 ansible_host=10.0.0.254
+rpizw  ansible_host=10.0.0.200
