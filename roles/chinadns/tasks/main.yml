@@ -27,7 +27,7 @@
   systemd:
     name: chinadns
     enabled: yes
-    state: started
+    state: restarted
 
 
 

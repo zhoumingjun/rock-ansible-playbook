@@ -14,8 +14,6 @@
   - import_role:
       name: gateway
   - import_role:
-      name: autossh
-  - import_role:
       name: ngrok
 
 

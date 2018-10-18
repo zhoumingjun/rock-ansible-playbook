@@ -37,7 +37,7 @@
   become: true
   systemd:
     name: "{{ item }}"
-    state: started
+    state: restarted
     enabled: True
   with_items:
     - shadowsocks-libev-redir@redir.service
