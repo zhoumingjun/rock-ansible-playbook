@@ -1,0 +1,13 @@
+# Systemd unit file for chinadns
+[Unit]
+Description=Protect yourself against DNS poisoning in China
+After=syslog.target network.target
+
+[Service]
+Type=simple
+
+ExecStart=/opt/chinadns/chinadns -b 0.0.0.0 -p {{ chinadns.port }} -c /opt/chinadns/chnroute.txt -s "114.114.114.114,127.0.0.1:{{ sstunnel.port }}"
+ExecStop=/bin/kill -15 $MAINPID
+
+[Install]
+WantedBy=multi-user.target

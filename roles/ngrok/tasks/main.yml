@@ -7,6 +7,21 @@
     mode: 0644 
     force: yes
 
+- name: /opt/ngrok dir
+  become: yes
+  file:
+    path: /opt/ngrok
+    state: directory
+    mode: 0755
+
+- name: ngrok exe
+  become: yes
+  copy:
+    src: ngrok
+    dest: /opt/ngrok/ngrok
+    mode: 0655
+    force: yes
+
 - name: create ngrok.conf
   become: true
   template: 
@@ -19,4 +34,5 @@
   systemd:
     name: ngrok@ssh.service
     state: started
+    daemon_reload: yes
     enabled: true

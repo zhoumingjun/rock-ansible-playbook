@@ -16,7 +16,7 @@ ansible-vault decrypt host_vars/* --vault-id @vaultid
 ```
  
 ##  install rock64
-ansible-playbook rock64.yml -i hosts --user rock64 --ask-become-pass  --vault-id @vaultid  -vv
+ansible-playbook rock64.yml -i hosts --user zhoumingjun --ask-become-pass  --vault-id @vaultid  -vv
 
 ## install rpizw
 ansible-playbook rpizw.yml -i hosts --user pi --ask-become-pass  --vault-id @vaultid  -vv

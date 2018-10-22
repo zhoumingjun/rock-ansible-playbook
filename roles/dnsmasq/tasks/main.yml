@@ -13,21 +13,22 @@
 
 - name: dnsmasq.conf
   become: yes
-  copy:
-    src: dnsmasq.conf
+  template:
+    src: dnsmasq.conf.j2
     dest: /etc/dnsmasq.conf
     mode: 0644 
     force: yes
 
 - name: dnsmasq.conf
   become: yes
-  copy:
-    src: dnsmasq_gfwlist_ipset.conf
+  template:
+    src: dnsmasq_gfwlist_ipset.conf.j2
     dest: /etc/dnsmasq.d/dnsmasq_gfwlist_ipset.conf
     mode: 0644 
     force: yes
 
 - name: dnsmasq service
+  become: yes
   systemd:
     name: dnsmasq
     enabled: yes

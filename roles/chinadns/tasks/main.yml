@@ -1,5 +1,12 @@
 ---
 # configure chinadns
+- name: /opt/chinadns dir
+  become: yes
+  file:
+    path: /opt/chinadns
+    state: directory
+    mode: 0755
+
 - name: create chinadns
   become: true
   copy: 
@@ -17,16 +24,20 @@
   
 - name: create chinadns service
   become: true
-  copy:
-    src: chinadns.service
+  template:
+    src: chinadns.service.j2
     dest: /lib/systemd/system/chinadns.service
     mode: 0644
     force: yes
 
+ 
+
 - name: enable service chinadns.service 
+  become: true
   systemd:
     name: chinadns
     enabled: yes
+    daemon_reload: yes
     state: restarted
 
 

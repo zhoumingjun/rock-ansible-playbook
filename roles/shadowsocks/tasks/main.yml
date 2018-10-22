@@ -13,14 +13,14 @@
   template:
     src: redir.json.j2
     dest: /etc/shadowsocks-libev/redir-{{item.name}}.json
-  with_items: "{{ ss.servers }}"
+  with_items: "{{ ssserver.servers }}"
 
 - name: create ss-tunnel configurations
   become: true
   template:
     src: tunnel.json.j2
     dest: /etc/shadowsocks-libev/tunnel-{{item.name}}.json
-  with_items: "{{ ss.servers }}"
+  with_items: "{{ ssserver.servers }}"
 
 - name: Create symbolic link 
   become: true
@@ -30,17 +30,23 @@
     force: yes 
     state: link 
   with_items:
-    - { src: "/etc/shadowsocks-libev/redir-{{ss.default}}.json", dest: "/etc/shadowsocks-libev/redir.json" }
-    - { src: "/etc/shadowsocks-libev/tunnel-{{ss.default}}.json", dest: "/etc/shadowsocks-libev/tunnel.json" }
+    - { src: "/etc/shadowsocks-libev/redir-{{ssserver.default}}.json", dest: "/etc/shadowsocks-libev/redir.json" }
+    - { src: "/etc/shadowsocks-libev/tunnel-{{ssserver.default}}.json", dest: "/etc/shadowsocks-libev/tunnel.json" }
 
 - name: ss systemd
   become: true
   systemd:
     name: "{{ item }}"
     state: restarted
-    enabled: True
+    enabled: yes
   with_items:
     - shadowsocks-libev-redir@redir.service
     - shadowsocks-libev-tunnel@tunnel.service
 
--
+- name: stop shadowsocks-libev
+  become: true
+  systemd:
+    name:  shadowsocks-libev
+    state: stopped
+    enabled: no
+ 

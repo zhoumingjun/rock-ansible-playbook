@@ -19,7 +19,7 @@ ipset create gfwlist hash:ip
 # iptables
 # nat
 iptables -t nat -N SHADOWSOCKS
-{% for item in ss.servers %}
+{% for item in ssserver.servers %}
 iptables -t nat -A SHADOWSOCKS -d {{ item.server }} -j RETURN
 {% endfor %}
 iptables -t nat -A SHADOWSOCKS -m set --match-set loprivate dst -j RETURN
